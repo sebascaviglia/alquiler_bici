@@ -1,39 +1,36 @@
-# History files
-.Rhistory
-.Rapp.history
+data <- daily.bike.rentals.csv
+data$season <- factor(data$season, levels= c(1,2,3,4),
+                      labels = c("invierno", "primavera", "verano", "otoño" ))
+data$workingday <- factor(data$workingday, levels = c(0,1),
+                          labels = c("festivo", "de trabajo"))
+data$weathersit <- factor(data$weathersit, levels = c(1,2,3),
+                          labels = c("despejado", "nublado", "lluvia o nieve"))
+attach(data)
 
-# Session Data files
-.RData
+par(mfrow=c(2,2))
+winter <- subset(data, season == "invierno")$cnt
+spring <- subset(data, season == "primavera")$cnt
+summer<- subset(data, season == "verano")$cnt
+fall <- subset(data, season == "otoño")$cnt
 
-# User-specific files
-.Ruserdata
+#histogramas
 
-# Example code in package build process
-*-Ex.R
+hist(winter, prob= TRUE, xlab = "alquiler diario en invierno", main = "")
+lines(density(winter))
+abline(v= mean(winter), col = "red")
+abline(v=median(winter), col ="blue" )
 
-# Output files from R CMD build
-/*.tar.gz
+hist(spring, prob= TRUE, xlab = "alquiler diario en primavera", main = "")
+lines(density(spring))
+abline(v= mean(spring), col = "red")
+abline(v=median(spring), col ="blue" )
 
-# Output files from R CMD check
-/*.Rcheck/
+hist(summer, prob= TRUE, xlab = "alquiler diario en verano", main = "")
+lines(density(summer))
+abline(v= mean(summer), col = "red")
+abline(v=median(summer), col ="blue" )
 
-# RStudio files
-.Rproj.user/
-
-# produced vignettes
-vignettes/*.html
-vignettes/*.pdf
-
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
-
-# knitr and R markdown default cache directories
-*_cache/
-/cache/
-
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
-
-# R Environment Variables
-.Renviron
+hist(fall, prob= TRUE, xlab = "alquiler diario en otoño", main = "")
+lines(density(fall))
+abline(v= mean(fall), col = "red")
+abline(v=median(fall), col ="blue" )
